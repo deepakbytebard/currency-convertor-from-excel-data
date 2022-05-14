@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { IndividualData } from "./IndividualData";
-import axios from "axios";
 
 export const Data = ({ excelData, rates, base }) => {
   return excelData.map((individualExcelData) => (

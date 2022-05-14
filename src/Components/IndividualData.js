@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export const IndividualData = ({
   individualExcelData,
@@ -6,9 +6,14 @@ export const IndividualData = ({
 
   base,
 }) => {
-  const [currentCurrency, setCurrentCurrency] = useState(
-    individualExcelData?.Currency
-  );
+  function noData(x) {
+    if (x === null || x === "") {
+      return "";
+    }
+    return x;
+  }
+
+  const currentCurrency = noData(individualExcelData?.Currency);
 
   const val = "USD" + currentCurrency;
 
@@ -24,25 +29,32 @@ export const IndividualData = ({
 
   const baseData = base ? base.slice(3, 6) : "";
 
+  const convertTo = (baseData) => {
+    if (noData(currentCurrency)) {
+      return baseData;
+    }
+    return "";
+  };
+
   return (
     <>
-      {individualExcelData ? (
-        <>
-          <th>{individualExcelData.Name}</th>
-          <th className="convertTo">{currentCurrency}</th>
-          <th className="convertTo">{individualExcelData.Amount}</th>
-          <th className="convertTo">
+      <th>{noData(individualExcelData.Name)}</th>
+      <th className="convertTo">{noData(currentCurrency)}</th>
+      <th className="convertTo">{noData(individualExcelData.Amount)}</th>
+      <th className="convertTo">
+        {individualExcelData["Transaction Date"] ? (
+          <>
             {new Date(
               [individualExcelData["Transaction Date"] - 25569] * 86400 * 1000
             ).toDateString()}
-          </th>
+          </>
+        ) : (
+          ""
+        )}
+      </th>
 
-          <th className="convertTo">{baseData}</th>
-          <th className="convertTo">{isEmpty(convertedPrice)}</th>
-        </>
-      ) : (
-        "producst"
-      )}
+      <th className="convertTo">{convertTo(baseData)}</th>
+      <th className="convertTo">{isEmpty(convertedPrice)}</th>
     </>
   );
 };

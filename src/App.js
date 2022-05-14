@@ -112,7 +112,6 @@ function App() {
             <div className="convert-btn">
               <h5>Convert Excel to</h5>
               <select
-                scope="col"
                 onChange={(e) => {
                   const value = e.target.value;
                   setBase(value);
