@@ -70,9 +70,12 @@ function App() {
       });
   }, []);
 
-  const updatedRates = rates ? rates : currencyData[0]?.quotes;
+  const updatedRates = rates ? currencyData[0]?.quotes : rates;
 
-  const newCurrency = Object.keys(rates);
+  console.log(currencyData[0]?.quotes, "currencyData?.quotes");
+  console.log(base, "bassse");
+
+  const newCurrency = Object.keys(updatedRates);
   return (
     <div className="container">
       {/* upload file section */}
