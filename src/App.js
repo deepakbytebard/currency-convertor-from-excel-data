@@ -22,9 +22,7 @@ function App() {
   ];
   const handleFile = (e) => {
     let selectedFile = e.target.files[0];
-    console.log(selectedFile.type);
     if (selectedFile) {
-      // console.log(selectedFile.type);
       if (selectedFile && fileType.includes(selectedFile.type)) {
         let reader = new FileReader();
         reader.readAsArrayBuffer(selectedFile);
@@ -65,15 +63,11 @@ function App() {
         "https://api.apilayer.com/currency_data/live?base=USD&symbols=INR,GBP&apikey=2dwOEjeqYFPaZxM2R1BaHVNscpCOoENx"
       )
       .then((response) => {
-        console.log(response, "res  ");
         setRates(response?.data?.quotes);
       });
   }, []);
 
   const updatedRates = rates ? currencyData[0]?.quotes : rates;
-
-  console.log(currencyData[0]?.quotes, "currencyData?.quotes");
-  console.log(base, "bassse");
 
   const newCurrency = Object.keys(updatedRates);
   return (
