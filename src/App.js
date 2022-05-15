@@ -26,13 +26,14 @@ function App() {
       if (selectedFile && fileType.includes(selectedFile.type)) {
         let reader = new FileReader();
         reader.readAsArrayBuffer(selectedFile);
+        setExcelData(e.preventDefault());
         reader.onload = (e) => {
           setExcelFileError(null);
           setExcelFile(e.target.result);
         };
       } else {
         setExcelFileError("Please select only excel file types");
-        setExcelFile(null);
+        setExcelFile("");
       }
     } else {
       console.log("plz select your file");
@@ -70,6 +71,7 @@ function App() {
   const updatedRates = rates ? currencyData[0]?.quotes : rates;
 
   const newCurrency = Object.keys(updatedRates);
+
   return (
     <div className="container">
       {/* upload file section */}
@@ -137,26 +139,6 @@ function App() {
                   </th>
                   <th className="convertTo" scope="col">
                     Convert To
-                    {/* <select
-                      scope="col"
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        setBase(value);
-                      }}
-                    >
-                      {newCurrency.map((currency) => (
-                        <option value={currency}>{currency.slice(3, 6)}</option>
-                      ))}
-
-                      {/* <select
-                        className="custom-select"
-                        value={base}
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          setBase(value);
-                        }}
-                      ></select> */}
-                    {/* </select> */}
                   </th>
                   <th className="convertTo" scope="col">
                     Converted Amout
@@ -164,7 +146,15 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                <Data excelData={excelData} rates={updatedRates} base={base} />
+                {excelData?.filter((i) => typeof i.Name !== undefined) &&
+                  excelData?.map((i) => i.Amount) &&
+                  excelData?.map((i) => i["Transaction Date"]) && (
+                    <Data
+                      excelData={excelData}
+                      rates={updatedRates}
+                      base={base}
+                    />
+                  )}
               </tbody>
             </table>
           </div>
