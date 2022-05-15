@@ -42,6 +42,8 @@ export const IndividualData = ({
     return "";
   };
 
+  var resultAmount = baseData ? convertedPrice : "";
+
   return (
     <>
       <th>{noData(individualExcelData.Name)}</th>
@@ -60,7 +62,7 @@ export const IndividualData = ({
       </th>
 
       <th className="convertTo">{convertTo(baseData)}</th>
-      <th className="convertTo">{convertedPrice}</th>
+      <th className="convertTo">{resultAmount}</th>
     </>
   );
 };

@@ -75,7 +75,12 @@ function App() {
 
   const newCurrency = Object.keys(updatedRates);
 
-  // const item = excelData.map((i) => i);
+  const d = excelData?.map((i) => {
+    if (typeof i.Name !== undefined) return i;
+    return;
+  });
+
+  console.log(d);
 
   return (
     <div className="container">
@@ -130,45 +135,55 @@ function App() {
               </select>
             </div>
             {excelData && (
-              <table className="table" id="table-to-excel">
-                <thead>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th className="convertTo" scope="col">
-                      Currency
-                    </th>
-                    <th className="convertTo" scope="col">
-                      Amount
-                    </th>
-                    <th className="convertTo" scope="col">
-                      Transaction Date
-                    </th>
-                    <th className="convertTo" scope="col">
-                      Convert To
-                    </th>
-                    <th className="convertTo" scope="col">
-                      Converted Amout
-                    </th>
-                  </tr>
-                </thead>
+              <div>
+                <table className="table" id="table-to-excel">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th className="convertTo" scope="col">
+                        Currency
+                      </th>
+                      <th className="convertTo" scope="col">
+                        Amount
+                      </th>
+                      <th className="convertTo" scope="col">
+                        Transaction Date
+                      </th>
+                      <th className="convertTo" scope="col">
+                        Convert To
+                      </th>
+                      <th className="convertTo" scope="col">
+                        Converted Amout
+                      </th>
+                    </tr>
+                  </thead>
 
-                <tbody>
-                  {/* {excelData && ( */}
-                  <Data
-                    excelData={excelData}
-                    rates={updatedRates}
-                    base={base}
+                  <tbody>
+                    {/* {excelData && ( */}
+                    <Data
+                      excelData={excelData}
+                      rates={updatedRates}
+                      base={base}
+                    />
+                  </tbody>
+                </table>
+                <div className="buttons">
+                  <ReactHTMLTableToExcel
+                    id="test-table-xls-button"
+                    className="download-table-xls-button btn btn-success mb-3"
+                    table="table-to-excel"
+                    filename="tablexls"
+                    sheet="currencyConvertor"
+                    buttonText="Export Data to Excel Sheet"
                   />
-                </tbody>
-                <ReactHTMLTableToExcel
-                  id="test-table-xls-button"
-                  className="download-table-xls-button btn btn-success mb-3"
-                  table="table-to-excel"
-                  filename="tablexls"
-                  sheet="tablexls"
-                  buttonText="Export Data to Excel Sheet"
-                />
-              </table>
+                  <button
+                    className="reset-btn"
+                    onClick={() => setExcelData(null)}
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
             )}
           </div>
         )}

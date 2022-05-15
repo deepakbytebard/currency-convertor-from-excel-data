@@ -51,3 +51,24 @@
   display: inline-block;
   margin-right: 10px;
 }
+
+.reset-btn{
+  background-color: rgb(54, 54, 104)  !important;
+  color:white;
+  font-size: larger;
+  border: 2px solid rgb(54, 54, 104);
+  border-radius: 5px;
+  margin: 0 0 20px 10px;
+  padding: 0 10px;
+
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: none !important;
+ align-items: center;
+ text-align: center;
+
+}
