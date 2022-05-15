@@ -75,13 +75,6 @@ function App() {
 
   const newCurrency = Object.keys(updatedRates);
 
-  const d = excelData?.map((i) => {
-    if (typeof i.Name !== undefined) return i;
-    return;
-  });
-
-  console.log(d);
-
   return (
     <div className="container">
       {/* upload file section */}
