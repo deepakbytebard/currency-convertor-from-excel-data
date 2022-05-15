@@ -72,6 +72,8 @@ function App() {
 
   const newCurrency = Object.keys(updatedRates);
 
+  // const item = excelData.map((i) => i);
+
   return (
     <div className="container">
       {/* upload file section */}
@@ -146,15 +148,13 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {excelData?.filter((i) => typeof i.Name !== undefined) &&
-                  excelData?.map((i) => i.Amount) &&
-                  excelData?.map((i) => i["Transaction Date"]) && (
-                    <Data
-                      excelData={excelData}
-                      rates={updatedRates}
-                      base={base}
-                    />
-                  )}
+                {excelData && (
+                  <Data
+                    excelData={excelData}
+                    rates={updatedRates}
+                    base={base}
+                  />
+                )}
               </tbody>
             </table>
           </div>
