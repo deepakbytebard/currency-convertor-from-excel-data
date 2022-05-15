@@ -20,6 +20,7 @@ function App() {
     "application/xlsx",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     "text/csv",
+    "image/webp",
   ];
   const handleFile = (e) => {
     let selectedFile = e.target.files[0];
