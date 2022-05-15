@@ -19,6 +19,7 @@ function App() {
     "application/vnd.ms-excel",
     "application/xlsx",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "text/csv",
   ];
   const handleFile = (e) => {
     let selectedFile = e.target.files[0];
@@ -32,7 +33,9 @@ function App() {
           setExcelFile(e.target.result);
         };
       } else {
-        setExcelFileError("Please select only excel file types");
+        setExcelFileError(
+          "Please select either excel or csv or xslx file's types"
+        );
         setExcelFile("");
       }
     } else {
@@ -96,7 +99,7 @@ function App() {
           )}
           <button
             type="submit"
-            className="btn btn-success"
+            className="btn btn-succ"
             style={{ marginTop: 5 + "px" }}
           >
             Submit
@@ -126,48 +129,50 @@ function App() {
                 ))}
               </select>
             </div>
-            <table className="table" id="table-to-excel">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th className="convertTo" scope="col">
-                    Currency
-                  </th>
-                  <th className="convertTo" scope="col">
-                    Amount
-                  </th>
-                  <th className="convertTo" scope="col">
-                    Transaction Date
-                  </th>
-                  <th className="convertTo" scope="col">
-                    Convert To
-                  </th>
-                  <th className="convertTo" scope="col">
-                    Converted Amout
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {excelData && (
+            {excelData && (
+              <table className="table" id="table-to-excel">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th className="convertTo" scope="col">
+                      Currency
+                    </th>
+                    <th className="convertTo" scope="col">
+                      Amount
+                    </th>
+                    <th className="convertTo" scope="col">
+                      Transaction Date
+                    </th>
+                    <th className="convertTo" scope="col">
+                      Convert To
+                    </th>
+                    <th className="convertTo" scope="col">
+                      Converted Amout
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {/* {excelData && ( */}
                   <Data
                     excelData={excelData}
                     rates={updatedRates}
                     base={base}
                   />
-                )}
-              </tbody>
-            </table>
+                </tbody>
+                <ReactHTMLTableToExcel
+                  id="test-table-xls-button"
+                  className="download-table-xls-button btn btn-success mb-3"
+                  table="table-to-excel"
+                  filename="tablexls"
+                  sheet="tablexls"
+                  buttonText="Export Data to Excel Sheet"
+                />
+              </table>
+            )}
           </div>
         )}
       </div>
-      <ReactHTMLTableToExcel
-        id="test-table-xls-button"
-        className="download-table-xls-button btn btn-success mb-3"
-        table="table-to-excel"
-        filename="tablexls"
-        sheet="tablexls"
-        buttonText="Export Data to Excel Sheet"
-      />
     </div>
   );
 }

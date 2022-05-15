@@ -17,8 +17,12 @@ export const IndividualData = ({
 
   const val = "USD" + currentCurrency;
 
-  const price = (individualExcelData.Amount * rates[base]) / rates[val];
-  const convertedPrice = price.toFixed(2);
+  const price =
+    typeof individualExcelData.Amount === "number"
+      ? (individualExcelData.Amount * rates[base]) / rates[val]
+      : "invallid Number";
+  const convertedPrice =
+    typeof price === "number" ? price.toFixed(2) : "invalid Input";
 
   function isEmpty(x) {
     if (isNaN(x)) {
@@ -26,6 +30,8 @@ export const IndividualData = ({
     }
     return x;
   }
+
+  console.log(convertedPrice, "convery");
 
   const baseData = base ? base.slice(3, 6) : "";
 
@@ -54,7 +60,7 @@ export const IndividualData = ({
       </th>
 
       <th className="convertTo">{convertTo(baseData)}</th>
-      <th className="convertTo">{isEmpty(convertedPrice)}</th>
+      <th className="convertTo">{convertedPrice}</th>
     </>
   );
 };

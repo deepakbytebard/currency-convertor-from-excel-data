@@ -13,6 +13,24 @@
   /* width: 100vw; */
 }
 
+.btn-succ{
+  margin-top: 10px !important;
+  padding: 5px 100px !important;
+  font-size: larger !important;
+  background-color: green !important;
+  border-color: rgb(47, 168, 47) !important;
+  border: none;
+  color: whitesmoke !important;
+}
+
+.btn-succ:hover{
+    background-color: rgb(10, 87, 10) !important;
+}
+
+.btn-success{
+  border: none !important;
+}
+
 .table-responsive{
   display: flex;
   flex-direction: column !important;
