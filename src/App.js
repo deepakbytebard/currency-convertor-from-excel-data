@@ -114,7 +114,7 @@ function App() {
         {excelData !== null && (
           <div className="table-responsive">
             <div className="convert-btn">
-              <h5>Convert Excel to</h5>
+              <h5>Convert Current Currency to</h5>
               <select
                 onChange={(e) => {
                   const value = e.target.value;
